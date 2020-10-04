@@ -1,0 +1,70 @@
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리스트 데이터 출력</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .lists span {
+            display: none
+        }
+
+        .lists.on span {
+            display: block;
+        }
+
+        .lists.on h3 {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in list" :key="item.id" class="lists">
+                <h3 @click="onShow(item.id);" style="cursor:pointer">{{ item.title }}</h3>
+                <span>{{ item.desc }}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                hide: false,
+                list: [
+                    {
+                        id: 0,
+                        title: '리스트 첫번째 입니다',
+                        desc: '타이틀을 클릭하면 아래 자세한 설명을 읽으실 수 있습니다. 이 리스트를 Vuejs를 테스트하기 위해 만들어진 예제입니다. '
+                    },
+                    {
+                        id: 1,
+                        title: '리스트 두번째 입니다',
+                        desc: '타이틀을 클릭하면 아래 자세한 설명을 읽으실 수 있습니다. 이 리스트를 Vuejs를 테스트하기 위해 만들어진 예제입니다. '
+                    },
+                    {
+                        id: 2,
+                        title: '리스트 세번째 입니다',
+                        desc: '타이틀을 클릭하면 아래 자세한 설명을 읽으실 수 있습니다. 이 리스트를 Vuejs를 테스트하기 위해 만들어진 예제입니다. '
+                    }
+                ]
+            },
+            methods: {
+                onShow: function (idx) {
+                    var lists = document.getElementsByClassName('lists');
+                    console.log(lists[idx]);
+                    for (let i = 0; i < lists.length; i++) {
+                        lists[i].classList.remove("on");
+                    }
+                    lists[idx].classList.add("on");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
